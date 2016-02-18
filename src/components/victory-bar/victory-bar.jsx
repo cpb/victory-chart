@@ -270,6 +270,7 @@ export default class VictoryBar extends React.Component {
           style={style}
           position={position}
           datum={datum}
+          staticStyling={this.props.staticStyling}
         />
       );
       const shouldPlotLabel = BarHelpers.shouldPlotLabel(
@@ -291,6 +292,7 @@ export default class VictoryBar extends React.Component {
               datum={datum}
               labelText={datum.label || labelText}
               labelComponent={labelComponent}
+              staticStyling={this.props.staticStyling}
             />
           </g>
         );
