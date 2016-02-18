@@ -189,6 +189,11 @@ export default class VictoryBar extends React.Component {
      */
     standalone: PropTypes.bool,
     /**
+     * When set to `true`, the VictoryBar component (and subcomponents) will bypass
+     * Radium style computation after the initial render.
+     */
+    staticStyling: PropTypes.bool,
+    /**
      * The style prop specifies styles for your chart. VictoryBar relies on Radium,
      * so valid Radium style objects should work for this prop, however height, width, and margin
      * are used to calculate range, and need to be expressed as a number of pixels
@@ -252,7 +257,7 @@ export default class VictoryBar extends React.Component {
 
   static getDomain = BarHelpers.getDomain.bind(BarHelpers);
 
-  componentWillMount () {
+  componentWillMount() {
     this.memoized = {
       getStyles: memoize(Helpers.getStyles)
     };
@@ -354,7 +359,8 @@ export default class VictoryBar extends React.Component {
       );
     }
 
-    const style = this.memoized.getStyles(this.props.style, defaultStyles, this.props.height, this.props.width);
+    const style = this.memoized.getStyles(
+      this.props.style, defaultStyles, this.props.height, this.props.width);
     const group = <g style={style.parent}>{this.renderData(this.props, style)}</g>;
     return this.props.standalone ? <svg style={style.parent}>{group}</svg> : group;
   }
